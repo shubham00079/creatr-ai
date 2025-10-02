@@ -1,8 +1,6 @@
 'use client';
 import { useStoreUser } from '@/hooks/use-store-user';
 import {
-  SignedIn,
-  SignedOut,
   SignInButton,
   SignUpButton,
   UserButton,
