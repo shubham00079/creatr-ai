@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { BarLoader } from 'react-spinners';
+import { Button } from './ui/button';
+import { LayoutDashboard } from 'lucide-react';
 
 const Header = () => {
   const { isLoading, isAuthenticated } = useStoreUser();
@@ -44,17 +46,29 @@ const Header = () => {
             </Link>
           </div>
         )}
-        <Unauthenticated>
-          <SignInButton />
-          <SignUpButton>
-            <button className='bg-[#6c47ff] text-ceramic-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer'>
-              Sign Up
-            </button>
-          </SignUpButton>
-        </Unauthenticated>
-        <Authenticated>
-          <UserButton />
-        </Authenticated>
+        <div className='flex items-center gap-2 sm:gap-3 flex-shrink-0'>
+          <Authenticated>
+            <Link href='/'>
+              <Button variant='outline' className='hidden sm:flex' size='sm'>
+                <LayoutDashboard className='h-4 w-4' />
+                <span className='hidden md:inline ml-2'>Dashboard</span>
+              </Button>
+            </Link>
+            <UserButton />
+          </Authenticated>
+          <Unauthenticated>
+            <SignInButton>
+              <Button variant='ghost' size='sm'>
+                Sign In
+              </Button>
+            </SignInButton>
+            <SignUpButton>
+              <Button variant='primary' size='sm' className='whitespace-nowrap'>
+                Get Started
+              </Button>
+            </SignUpButton>
+          </Unauthenticated>
+        </div>
         {isLoading && (
           <div className='fixed bottom-0 left-0 w-full z-40 flex justify-center'>
             <BarLoader width={'95%'} color='#D8B4FE' />
