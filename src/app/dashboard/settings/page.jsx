@@ -21,7 +21,7 @@ const SettingsPage = () => {
   const [username, setUsername] = useState('');
 
   const { data: currentUser, isLoading } = useConvexQuery(
-    api.users.getCurrentuser
+    api.users.getCurrentUser
   );
 
   const { mutate: updateUsername, isLoading: isSubmitting } = useConvexMutation(

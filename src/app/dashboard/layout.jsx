@@ -2,6 +2,7 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { useConvexQuery } from '@/hooks/use-convex-query';
 import { cn } from '@/lib/utils';
 import { UserButton } from '@clerk/nextjs';
 import {
@@ -16,6 +17,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { api } from '../../../convex/_generated/api';
 import React, { useState } from 'react';
 
 const sidebarItems = [
@@ -43,6 +45,7 @@ const sidebarItems = [
 
 const DashBoardLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { data: draftPost } = useConvexQuery(api.posts.getUserDraft);
   const pathname = usePathname();
 
   return (
@@ -107,7 +110,7 @@ const DashBoardLayout = ({ children }) => {
                   <span className='font-medium'>{item.title}</span>
 
                   {/* Badge for Create Post if draft exists */}
-                  {item.title === 'Create Post' && true && (
+                  {item.title === 'Create Post' && draftPost && (
                     <Badge
                       variant='secondary'
                       className='ml-auto text-xs bg-orange-500/20 text-orange-300 border-orange-500/30'

@@ -36,7 +36,7 @@ export const store = mutation({
   },
 });
 
-export const getCurrentuser = query({
+export const getCurrentUser = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
 
